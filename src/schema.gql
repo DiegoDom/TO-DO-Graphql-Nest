@@ -1,0 +1,64 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Todo {
+  id: Int!
+  description: String!
+  done: Boolean!
+}
+
+"""TODO quick aggregations"""
+type AggregationsType {
+  total: Int!
+  pending: Int!
+  completed: Int!
+}
+
+type Query {
+  """My first Graphql resolver"""
+  hello: String!
+
+  """Generate a random number"""
+  randomNumber: Float!
+
+  """Generate a random number from zero to any number"""
+  randomFromZeroTo(max: Int = 10): Int!
+  todos(
+    """Filter done or undone tasks"""
+    status: Boolean
+  ): [Todo!]!
+  todo(id: Int!): Todo!
+
+  """Counts all registered task"""
+  totalTodos: Int!
+
+  """Counts all done task"""
+  completedTodos: Int!
+
+  """Counts all undone task"""
+  pendingTodos: Int!
+  aggregations: AggregationsType!
+}
+
+type Mutation {
+  createTodo(createTodoInput: CreateTodoInput!): Todo!
+  updateTodo(updateTodoInput: UpdateTodoInput!): Todo!
+  deleteTodo(id: Int!): Boolean!
+}
+
+input CreateTodoInput {
+  """Describe the task you have to work on"""
+  description: String!
+}
+
+input UpdateTodoInput {
+  """Task ID"""
+  id: Int!
+
+  """Describe the task you have to work on"""
+  description: String
+
+  """Mark your task as done or undone"""
+  done: Boolean
+}
